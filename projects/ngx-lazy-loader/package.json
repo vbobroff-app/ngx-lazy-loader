@@ -1,6 +1,15 @@
 {
   "name": "ngx-lazy-loader",
-  "version": "0.0.1",
+  "description": "This library helps with lazy (dynamically) loading any modules and inner features",
+  "version": "0.0.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vbobroff-app/ngx-lazy-loader"
+  },
+  "keywords": ["lazy","load","typescript"],
+  "author": "Viktor Bobrov",
+  "license": "ISC",
+  "homepage": "https://www.npmjs.com/package/ngx-lazy-loader",
   "peerDependencies": {
     "@angular/common": "^10.2.4",
     "@angular/core": "^10.2.4"
