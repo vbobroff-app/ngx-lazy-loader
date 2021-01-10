@@ -12,11 +12,11 @@ export abstract class LazyLoader<M, T> {
     abstract load(): Observable<M>;
     abstract extract(module: M, key?: string): T;
 
-    place(state: M) {
+    place(state: M): void {
         this.module = state;
     }
 
-    require(key: string) {
+    require(key: string): Observable<T> {
         this.loadFlag = true;
         return this.load().pipe(
             map(module => {
@@ -26,7 +26,7 @@ export abstract class LazyLoader<M, T> {
             finalize(() => {
                 this.channels$.map(flow => flow.key
                     ? flow.subject.next(this.extract(this.module, flow.key))
-                    : flow.subject.next(this.module))
+                    : flow.subject.next(this.module));
             })
         );
     }
@@ -37,7 +37,7 @@ export abstract class LazyLoader<M, T> {
         } else if (!!this.module) {
             return of(this.extract(this.module, key));
         }
-        const subject = key? new Subject<T>() : new Subject<M>();
+        const subject = key ? new Subject<T>() : new Subject<M>();
         this.channels$.push({ key, subject });
         return subject;
     }
